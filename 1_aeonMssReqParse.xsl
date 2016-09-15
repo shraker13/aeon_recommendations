@@ -8,48 +8,42 @@
 
 	<xsl:strip-space elements="*"/>
 
-
 	<xsl:template match="dataroot">
 		<xsl:result-document method="xml" href="aeonMssReqParsed.xml">
-
 			<collections>
 				<EA-ColHis>
 					<xsl:for-each select="aeonMssReq">
 						<xsl:if test="contains(ResearchTopics, 'EA-ColHis')">
 							<xsl:if test="Location != ''">
-									<item>
-										<callnumber>
-											<xsl:value-of select="CallNumber" />
-										</callnumber>
-										<location>
-											<xsl:value-of select="Location" />
-										</location>
-									</item>
+								<item>
+									<callnumber>
+										<xsl:value-of select="CallNumber" />
+									</callnumber>
+									<location>
+										<xsl:value-of select="Location" />
+									</location>
+								</item>
 							</xsl:if>
 						</xsl:if>
 					</xsl:for-each>
 				</EA-ColHis>	
-
-<EA-AmRev>
+				<EA-AmRev>
 					<xsl:for-each select="aeonMssReq">
 						<xsl:if test="contains(ResearchTopics, 'EA-AmRev')">
 							<xsl:if test="Location != ''">
-									<item>
-										<callnumber>
-											<xsl:value-of select="CallNumber" />
-										</callnumber>
-										<location>
-											<xsl:value-of select="Location" />
-										</location>
-									</item>
+								<item>
+									<callnumber>
+										<xsl:value-of select="CallNumber" />
+									</callnumber>
+									<location>
+										<xsl:value-of select="Location" />
+									</location>
+								</item>
 							</xsl:if>
 						</xsl:if>
 					</xsl:for-each>
 				</EA-AmRev>						
 			</collections>	
-
 		</xsl:result-document>
 	</xsl:template>
-
-
 </xsl:stylesheet>	
