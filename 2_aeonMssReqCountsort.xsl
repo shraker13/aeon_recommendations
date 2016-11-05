@@ -7,27 +7,25 @@
       omit-xml-declaration="no"/>
   <xsl:strip-space elements="*"/>
   
-  <!-- This stylesheet finalizes the organization of all the data to provide final counts and creates a new document aeonMssCount.xml -->
+  <!-- This stylesheet takes the data from 'aeonMssReqParsed.xml' and gets the count on number of requests for each collection. It then outputs a new document, 'aeonMssReqCount'. -->
 
   <xsl:template match="collections">
-    <xsl:result-document method="xml" href="aeonMssCount.xml">
+    <xsl:result-document method="xml" href="aeonMssReqCount.xml">
       <collections>
         <xsl:for-each select="interest">
           <interest name="{@name}">
-            <xsl:for-each-group select="record" group-by="location">
+            <xsl:for-each-group select="item" group-by="location">
+              <xsl:sort select="count(current-group())" data-type="number" order="descending"/>
               <record>
-                <collection>
+                <location>
                   <xsl:value-of select="current-grouping-key()"/>
+                </location>
+                <collection>
+                  <xsl:value-of select="callnumber"/>
                 </collection>
-                <callnumber>
-                  <xsl:value-of select="collection"/>
-                </callnumber>
                 <requests>
-                  <xsl:value-of select="requests"/>
+                  <xsl:value-of select="count(current-group())"/>
                 </requests>
-                <users>
-                  <xsl:value-of select="current-group()/users"/>
-                </users>
               </record>
             </xsl:for-each-group>
           </interest>
@@ -36,6 +34,7 @@
     </xsl:result-document>
   </xsl:template>
 </xsl:stylesheet>
+
 
 
 
